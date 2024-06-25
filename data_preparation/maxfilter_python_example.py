@@ -21,7 +21,8 @@ trans="default" #, "ses1", "avg" or "init"
 
 
 input_file = f"{root}sub-{sub}/ses-{ses}/meg/sub-{sub}_ses-{ses}_task-{task}_run-{run}_proc-raw_meg.fif"
-output_file = f"{root}derivatives/sub-{sub}/ses-{ses}/meg/sub-{sub}_ses-{ses}_task-{task}_run-{run}_proc-tsss+mc_trans-{trans}_meg.fif"
+output_file = f"{root}derivatives/sub-{sub}/ses-{ses}/meg/sub-{sub}_ses-{ses}_task-{task}_run-{run}_proc-tsss+mc_meg.fif"
+trans_output_file = f"{root}derivatives/sub-{sub}/ses-{ses}/meg/sub-{sub}_ses-{ses}_task-{task}_run-{run}_proc-tsss+mc_trans-{trans}_meg.fif"
 log_file = f"{root}derivatives/sub-{sub}/ses-{ses}/meg/sub-{sub}_ses-{ses}_task-{task}_run-{run}_proc-tsss+mc_trans-{trans}_meg_log.log"
 
 #psecif the transformation file / option here 
@@ -29,25 +30,19 @@ trans_file= "default" #"/home/heikkiv/parkinsonsdisease/python/verna/KI_patient_
 
 
 # Fit SSS sphere origin to digitization points using fit_sphere_to_isotrak function
-origin_args = ['/neuro/bin/util/fit_sphere_to_isotrak', '-f', input_file]
-output = subprocess.check_output(args=origin_args, text=True).strip()
-origin = output.split(' ')
+#origin_args = ['/neuro/bin/util/fit_sphere_to_isotrak', '-f', input_file]
+#output = subprocess.check_output(args=origin_args, text=True).strip()
+#origin = output.split(' ')
 
 if trans!="init": #by default, maxfilter transforms the data into intial head position
-    args = ['/neuro/bin/util/mfilter', '-f', input_file, '-o', output_file, '-trans', trans_file, \
+    args = ['/neuro/bin/util/mfilter', '-f', input_file, '-o', output_file, \   #Change the path to NatMEG
             '-st', '-corr', '0.80', '-ds', '2', '-lpfilt', '100', \
-            '-hpiwin', '1000','-hpistep', '100', '-movecomp', 'inter', \
-            '-v','-autobad','on','-origin'] + origin + ['-in', '8', \
-            '-out', '3', '-frame', 'head', '-force'] #coordinate frame set to head
+            '-hpiwin', '1000','-hpistep', '100', '-movecomp', \
+            '-v','-origin', '0,0,55', \
+            '-force'] #coordinate frame set to head
                                                         
 else:                                                    
-    args2 = ['/neuro/bin/util/mfilter', '-f', input_file, '-o', output_file, '-hp', \
-            '-st', '-corr', '0.80', '-ds', '2', '-lpfilt', '100', \
-            '-hpiwin', '1000','-hpistep', '100', '-movecomp', 'inter', \
-            '-v','-autobad','on','-origin'] + origin + ['-in', '8', \
-            '-out', '3', '-frame', 'head', '-force']  
-                                                           
-                                                        
+    args2= ['/neuro/bin/util/mfilter',  '-f', output_file, '-o',  trans_output_file,  '-trans', trans_file, '-autobad', 'off', '-autoflat','off' '-force']                                                        
                                                    
 # save the log and errors
 log_output = open(log_file, "w") 
