@@ -45,7 +45,7 @@ if trans != "init": # by default, maxfilter transforms the data into initial hea
         '/neuro/bin/util/maxfilter', '-f', input_file, '-o', output_file,  # Change the path to NatMEG
         '-st', '-corr', '0.80', '-ds', '2', '-lpfilt', '100',
         '-hpiwin', '1000', '-hpistep', '100', '-movecomp',
-        '-v', '-frame', 'head', '-origin', '0 0 55',
+        '-v', '-frame', 'head', '-origin', '0', '0', '55',
         '-force'
     ]
 else:
