@@ -48,7 +48,7 @@ if trans!="init": #by default, maxfilter transforms the data into intial head po
             '-force'] #coordinate frame set to head
                                                         
 else:                                                    
-    args2= ['/neuro/bin/util/mfilter',  '-f', output_file, '-o',  trans_output_file,  '-trans', trans_file, '-autobad', 'off', '-autoflat','off' '-force']                                                        
+    args2= ['/neuro/bin/util/maxfilter',  '-f', output_file, '-o',  trans_output_file,  '-trans', trans_file, '-autobad', 'off', '-autoflat','off' '-force']                                                        
                                                    
 # save the log and errors
 log_output = open(log_file, "w") 
