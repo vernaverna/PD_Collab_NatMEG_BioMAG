@@ -11,7 +11,8 @@ import os
 import subprocess 
 
 # path to bidsified data
-root="/net/theta/fishpool/projects/dbs_pd/neuro-data/dbs_pd/BIDS/"
+#root="/net/theta/fishpool/projects/dbs_pd/neuro-data/dbs_pd/BIDS/"
+root="/data/MaxFilter-test-data/"
 
 sub="35P"
 ses="01"
@@ -20,10 +21,15 @@ task="sp"
 trans="default" #, "ses1", "avg" or "init"
 
 
-input_file = f"{root}sub-{sub}/ses-{ses}/meg/sub-{sub}_ses-{ses}_task-{task}_run-{run}_proc-raw_meg.fif"
-output_file = f"{root}derivatives/sub-{sub}/ses-{ses}/meg/sub-{sub}_ses-{ses}_task-{task}_run-{run}_proc-tsss+mc_meg.fif"
-trans_output_file = f"{root}derivatives/sub-{sub}/ses-{ses}/meg/sub-{sub}_ses-{ses}_task-{task}_run-{run}_proc-tsss+mc_trans-{trans}_meg.fif"
-log_file = f"{root}derivatives/sub-{sub}/ses-{ses}/meg/sub-{sub}_ses-{ses}_task-{task}_run-{run}_proc-tsss+mc_trans-{trans}_meg_log.log"
+#input_file = f"{root}sub-{sub}/ses-{ses}/meg/sub-{sub}_ses-{ses}_task-{task}_run-{run}_proc-raw_meg.fif"
+#output_file = f"{root}derivatives/sub-{sub}/ses-{ses}/meg/sub-{sub}_ses-{ses}_task-{task}_run-{run}_proc-tsss+mc_meg.fif"
+#trans_output_file = f"{root}derivatives/sub-{sub}/ses-{ses}/meg/sub-{sub}_ses-{ses}_task-{task}_run-{run}_proc-tsss+mc_trans-{trans}_meg.fif"
+#log_file = f"{root}derivatives/sub-{sub}/ses-{ses}/meg/sub-{sub}_ses-{ses}_task-{task}_run-{run}_proc-tsss+mc_trans-{trans}_meg_log.log"
+
+input_file = "/data/MaxFilter-test-data/RestEyesOpen.fif"
+output_file = "/data/MaxFilter-test-data/RestEyesOpen_tsss+mc.fif"
+trans_output_file = "/data/MaxFilter-test-data/RestEyesOpen_trans.fif"
+log_file = "/data/MaxFilter-test-data/RestEyesOpen_log.log"
 
 #psecif the transformation file / option here 
 trans_file= "default" #"/home/heikkiv/parkinsonsdisease/python/verna/KI_patient_average_rest_ec-trans.fif"
