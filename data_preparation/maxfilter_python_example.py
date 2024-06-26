@@ -40,15 +40,20 @@ trans_file= "default" #"/home/heikkiv/parkinsonsdisease/python/verna/KI_patient_
 #output = subprocess.check_output(args=origin_args, text=True).strip()
 #origin = output.split(' ')
 
-if trans!="init": #by default, maxfilter transforms the data into intial head position
-    args = ['/neuro/bin/util/maxfilter', '-f', input_file, '-o', output_file, \   #Change the path to NatMEG
-            '-st', '-corr', '0.80', '-ds', '2', '-lpfilt', '100', \
-            '-hpiwin', '1000','-hpistep', '100', '-move-comp', \
-            '-v', ‘-frame’, ‘head, ’-origin', '0 0 55', \
-            '-force'] #coordinate frame set to head
-                                                        
-else:                                                    
-    args2= ['/neuro/bin/util/maxfilter',  '-f', output_file, '-o',  trans_output_file,  '-trans', trans_file, '-autobad', 'off', '-autoflat','off' '-force']                                                        
+if trans != "init": # by default, maxfilter transforms the data into initial head position
+    args = [
+        '/neuro/bin/util/maxfilter', '-f', input_file, '-o', output_file,  # Change the path to NatMEG
+        '-st', '-corr', '0.80', '-ds', '2', '-lpfilt', '100',
+        '-hpiwin', '1000', '-hpistep', '100', '-movecomp',
+        '-v', '-frame', 'head', '-origin', '0 0 55',
+        '-force'
+    ]
+else:
+    args = [
+        '/neuro/bin/util/maxfilter', '-f', output_file, '-o', trans_output_file,
+        '-trans', trans_file, '-autobad', 'off', '-autoflat', 'off', '-force'
+    ]
+                                                     
                                                    
 # save the log and errors
 log_output = open(log_file, "w") 
